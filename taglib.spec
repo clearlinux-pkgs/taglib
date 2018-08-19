@@ -4,7 +4,7 @@
 #
 Name     : taglib
 Version  : 1.11.1
-Release  : 1
+Release  : 2
 URL      : http://taglib.org/releases/taglib-1.11.1.tar.gz
 Source0  : http://taglib.org/releases/taglib-1.11.1.tar.gz
 Summary  : No detailed summary available
@@ -16,6 +16,7 @@ Requires: taglib-license
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : zlib-dev
+Patch1: cve-2017-12678.patch
 
 %description
 Run "make docs" in the parent directory to generate the TagLib API documentation.
@@ -59,21 +60,26 @@ license components for the taglib package.
 
 %prep
 %setup -q -n taglib-1.11.1
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534698689
+export SOURCE_DATE_EPOCH=1534703763
 mkdir clr-build
 pushd clr-build
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1534698689
+export SOURCE_DATE_EPOCH=1534703763
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/taglib
 cp COPYING.LGPL %{buildroot}/usr/share/doc/taglib/COPYING.LGPL
