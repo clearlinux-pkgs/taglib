@@ -4,15 +4,15 @@
 #
 Name     : taglib
 Version  : 1.11.1
-Release  : 4
-URL      : http://taglib.org/releases/taglib-1.11.1.tar.gz
-Source0  : http://taglib.org/releases/taglib-1.11.1.tar.gz
+Release  : 5
+URL      : https://taglib.org/releases/taglib-1.11.1.tar.gz
+Source0  : https://taglib.org/releases/taglib-1.11.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1 MPL-1.1
-Requires: taglib-bin
-Requires: taglib-lib
-Requires: taglib-license
+Requires: taglib-bin = %{version}-%{release}
+Requires: taglib-lib = %{version}-%{release}
+Requires: taglib-license = %{version}-%{release}
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : zlib-dev
@@ -25,7 +25,7 @@ Run "make docs" in the parent directory to generate the TagLib API documentation
 %package bin
 Summary: bin components for the taglib package.
 Group: Binaries
-Requires: taglib-license
+Requires: taglib-license = %{version}-%{release}
 
 %description bin
 bin components for the taglib package.
@@ -34,9 +34,10 @@ bin components for the taglib package.
 %package dev
 Summary: dev components for the taglib package.
 Group: Development
-Requires: taglib-lib
-Requires: taglib-bin
-Provides: taglib-devel
+Requires: taglib-lib = %{version}-%{release}
+Requires: taglib-bin = %{version}-%{release}
+Provides: taglib-devel = %{version}-%{release}
+Requires: taglib = %{version}-%{release}
 
 %description dev
 dev components for the taglib package.
@@ -45,7 +46,7 @@ dev components for the taglib package.
 %package lib
 Summary: lib components for the taglib package.
 Group: Libraries
-Requires: taglib-license
+Requires: taglib-license = %{version}-%{release}
 
 %description lib
 lib components for the taglib package.
@@ -68,24 +69,28 @@ license components for the taglib package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1535303962
-mkdir clr-build
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1567296822
+mkdir -p clr-build
 pushd clr-build
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535303962
+export SOURCE_DATE_EPOCH=1567296822
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/taglib
-cp COPYING.LGPL %{buildroot}/usr/share/doc/taglib/COPYING.LGPL
-cp COPYING.MPL %{buildroot}/usr/share/doc/taglib/COPYING.MPL
+mkdir -p %{buildroot}/usr/share/package-licenses/taglib
+cp COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/COPYING.LGPL
+cp COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/COPYING.MPL
 pushd clr-build
 %make_install
 popd
@@ -217,6 +222,6 @@ popd
 /usr/lib64/libtag_c.so.0.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/taglib/COPYING.LGPL
-/usr/share/doc/taglib/COPYING.MPL
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/taglib/COPYING.LGPL
+/usr/share/package-licenses/taglib/COPYING.MPL
