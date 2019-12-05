@@ -4,7 +4,7 @@
 #
 Name     : taglib
 Version  : 1.11.1
-Release  : 5
+Release  : 6
 URL      : https://taglib.org/releases/taglib-1.11.1.tar.gz
 Source0  : https://taglib.org/releases/taglib-1.11.1.tar.gz
 Summary  : No detailed summary available
