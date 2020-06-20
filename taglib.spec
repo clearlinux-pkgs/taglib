@@ -4,7 +4,7 @@
 #
 Name     : taglib
 Version  : 1.11.1
-Release  : 7
+Release  : 8
 URL      : https://taglib.org/releases/taglib-1.11.1.tar.gz
 Source0  : https://taglib.org/releases/taglib-1.11.1.tar.gz
 Summary  : No detailed summary available
@@ -62,6 +62,7 @@ license components for the taglib package.
 
 %prep
 %setup -q -n taglib-1.11.1
+cd %{_builddir}/taglib-1.11.1
 %patch1 -p1
 %patch2 -p1
 
@@ -70,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567296822
+export SOURCE_DATE_EPOCH=1592660034
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -78,19 +79,19 @@ export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1567296822
+export SOURCE_DATE_EPOCH=1592660034
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/taglib
-cp COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/COPYING.LGPL
-cp COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/COPYING.MPL
+cp %{_builddir}/taglib-1.11.1/COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/taglib-1.11.1/COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b
 pushd clr-build
 %make_install
 popd
@@ -223,5 +224,5 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/taglib/COPYING.LGPL
-/usr/share/package-licenses/taglib/COPYING.MPL
+/usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b
