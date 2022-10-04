@@ -4,7 +4,7 @@
 #
 Name     : taglib
 Version  : 1.12
-Release  : 10
+Release  : 11
 URL      : https://taglib.org/releases/taglib-1.12.tar.gz
 Source0  : https://taglib.org/releases/taglib-1.12.tar.gz
 Summary  : No detailed summary available
@@ -66,27 +66,27 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613694507
+export SOURCE_DATE_EPOCH=1664904342
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1613694507
+export SOURCE_DATE_EPOCH=1664904342
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/taglib
-cp %{_builddir}/taglib-1.12/COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/taglib-1.12/COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b
+cp %{_builddir}/taglib-%{version}/COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/taglib-%{version}/COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b || :
 pushd clr-build
 %make_install
 popd
