@@ -403,6 +403,7 @@ libtag.so.1:_ZN6TagLib3MP43Tag13updateOffsetsEll
 libtag.so.1:_ZN6TagLib3MP43Tag13updateParentsERKNS_4ListIPNS0_4AtomEEEli
 libtag.so.1:_ZN6TagLib3MP43Tag27removeUnsupportedPropertiesERKNS_10StringListE
 libtag.so.1:_ZN6TagLib3MP43Tag4saveEv
+libtag.so.1:_ZN6TagLib3MP43Tag5stripEv
 libtag.so.1:_ZN6TagLib3MP43Tag7addItemERKNS_6StringERKNS0_4ItemE
 libtag.so.1:_ZN6TagLib3MP43Tag7saveNewENS_10ByteVectorE
 libtag.so.1:_ZN6TagLib3MP43Tag7setItemERKNS_6StringERKNS0_4ItemE
@@ -439,6 +440,7 @@ libtag.so.1:_ZN6TagLib3MP44File13setPropertiesERKNS_11PropertyMapE
 libtag.so.1:_ZN6TagLib3MP44File27removeUnsupportedPropertiesERKNS_10StringListE
 libtag.so.1:_ZN6TagLib3MP44File4readEb
 libtag.so.1:_ZN6TagLib3MP44File4saveEv
+libtag.so.1:_ZN6TagLib3MP44File5stripEi
 libtag.so.1:_ZN6TagLib3MP44FileC1EPKcbNS_15AudioProperties9ReadStyleE
 libtag.so.1:_ZN6TagLib3MP44FileC1EPNS_8IOStreamEbNS_15AudioProperties9ReadStyleE
 libtag.so.1:_ZN6TagLib3MP44FileC2EPKcbNS_15AudioProperties9ReadStyleE
@@ -1537,6 +1539,7 @@ libtag.so.1:_ZNK6TagLib10RefCounter5countEv
 libtag.so.1:_ZNK6TagLib10StringList8toStringERKNS_6StringE
 libtag.so.1:_ZNK6TagLib11PropertyMap15unsupportedDataEv
 libtag.so.1:_ZNK6TagLib11PropertyMap4findERKNS_6StringE
+libtag.so.1:_ZNK6TagLib11PropertyMap5valueERKNS_6StringERKNS_10StringListE
 libtag.so.1:_ZNK6TagLib11PropertyMap8containsERKNS_6StringE
 libtag.so.1:_ZNK6TagLib11PropertyMap8containsERKS0_
 libtag.so.1:_ZNK6TagLib11PropertyMap8toStringEv
