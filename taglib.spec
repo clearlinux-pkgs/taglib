@@ -6,13 +6,13 @@
 # autospec commit: 65cf152
 #
 Name     : taglib
-Version  : 2.1
-Release  : 17
-URL      : https://taglib.org/releases/taglib-2.1.tar.gz
-Source0  : https://taglib.org/releases/taglib-2.1.tar.gz
+Version  : 2.1.1
+Release  : 18
+URL      : https://taglib.org/releases/taglib-2.1.1.tar.gz
+Source0  : https://taglib.org/releases/taglib-2.1.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : LGPL-2.1 MPL-1.1
+License  : BSL-1.0 LGPL-2.1 MPL-1.1
 Requires: taglib-bin = %{version}-%{release}
 Requires: taglib-lib = %{version}-%{release}
 Requires: taglib-license = %{version}-%{release}
@@ -65,10 +65,10 @@ license components for the taglib package.
 
 
 %prep
-%setup -q -n taglib-2.1
-cd %{_builddir}/taglib-2.1
+%setup -q -n taglib-2.1.1
+cd %{_builddir}/taglib-2.1.1
 pushd ..
-cp -a taglib-2.1 buildavx2
+cp -a taglib-2.1.1 buildavx2
 popd
 
 %build
@@ -76,7 +76,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1748884952
+export SOURCE_DATE_EPOCH=1751291984
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -139,9 +139,10 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1748884952
+export SOURCE_DATE_EPOCH=1751291984
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/taglib
+cp %{_builddir}/taglib-%{version}/3rdparty/utfcpp/LICENSE %{buildroot}/usr/share/package-licenses/taglib/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90 || :
 cp %{_builddir}/taglib-%{version}/COPYING.LGPL %{buildroot}/usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/taglib-%{version}/COPYING.MPL %{buildroot}/usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b || :
 export GOAMD64=v2
@@ -294,14 +295,15 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libtag.so.2.1.0
-/V3/usr/lib64/libtag_c.so.2.1.0
+/V3/usr/lib64/libtag.so.2.1.1
+/V3/usr/lib64/libtag_c.so.2.1.1
 /usr/lib64/libtag.so.2
-/usr/lib64/libtag.so.2.1.0
+/usr/lib64/libtag.so.2.1.1
 /usr/lib64/libtag_c.so.2
-/usr/lib64/libtag_c.so.2.1.0
+/usr/lib64/libtag_c.so.2.1.1
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/taglib/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/taglib/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90
 /usr/share/package-licenses/taglib/aba8d76d0af67d57da3c3c321caa59f3d242386b
